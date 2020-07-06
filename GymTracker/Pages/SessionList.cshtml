@@ -6,9 +6,16 @@
 
 <h1>List of Gym Sessions</h1>
 
-<table>
+<table class="table">
     <tr>
         <th>Session Name</th>
         <th>Date</th>
     </tr>
+    @foreach(var session in Model.Sessions)
+    {
+        <tr>
+            <td>@session.Name</td>
+            <td>@session.Date.ToString("dd/MM/yyyy")</td>
+        </tr>
+    }
 </table>
