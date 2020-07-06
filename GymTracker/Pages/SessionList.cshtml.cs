@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using GymTracker.Data;
+using GymTracker.Models;
 
 namespace GymTracker.Pages
 {
@@ -14,6 +15,8 @@ namespace GymTracker.Pages
         private ILogger<IndexModel> _logger;
         private readonly ISessionData sessionData;
 
+        public IEnumerable<Session> Sessions { get; set; }
+
         public SessionListModel(ISessionData sessionData, ILogger<IndexModel> logger)
         {
             _logger = logger;
@@ -21,7 +24,7 @@ namespace GymTracker.Pages
         }
         public void OnGet()
         {
-
+            Sessions = sessionData.GetAll();
         }
     }
 }
