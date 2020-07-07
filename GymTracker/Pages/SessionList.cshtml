@@ -4,7 +4,7 @@
     ViewData["Title"] = "SessionList";
 }
 
-<h1>List of Gym Sessions</h1>
+<h2>List of Gym Sessions</h2>
 
 <table class="table">
     <tr>
@@ -16,6 +16,13 @@
         <tr>
             <td>@session.Name</td>
             <td>@session.Date.ToString("dd/MM/yyyy")</td>
+            <td>
+                <a class="btn btn-default"
+                   asp-page="./SessionDetail"
+                   asp-route-SessionId="@session.SessionId">
+                    <i class="fa fa-info-circle"></i>
+                </a>
+            </td>
         </tr>
     }
 </table>

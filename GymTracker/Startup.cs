@@ -25,6 +25,7 @@ namespace GymTracker
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ISessionData, InMemorySessionData>();
+            services.AddSingleton<IExerciseData, InMemoryExerciseData>();
             services.AddRazorPages();
         }
 

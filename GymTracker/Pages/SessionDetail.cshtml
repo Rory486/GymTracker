@@ -1,0 +1,31 @@
+﻿@page "{sessionId:int}"
+@model GymTracker.Pages.SessionDetailModel
+@{
+    ViewData["Title"] = "SessionDetail";
+}
+
+<h2>Session Details</h2>
+
+<table class="table">
+    <tr>
+        <th>Exercise Id</th>
+        <th>Name</th>
+        <th>Sets</th>
+        <th>Reps</th>
+        <th>Weight</th>
+        <th>Session Id</th>
+    </tr>
+    @foreach (var exercise in Model.Exercise)
+    {
+        <tr>
+            <td>@exercise.ExerciseId</td>
+            <td>@exercise.ExerciseName</td>
+            <td>@exercise.Sets</td>
+            <td>@exercise.Reps</td>
+            <td>@exercise.Weight</td>
+            <td>@exercise.SessionId</td>
+        </tr>
+    }
+</table>
+
+<a asp-page="./SessionList" class="btn btn-primary">All Sessions</a>
