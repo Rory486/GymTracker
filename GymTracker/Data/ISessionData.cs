@@ -28,7 +28,7 @@ namespace GymTracker.Data
         public IEnumerable<Session> GetAll()
         {
             return from s in sessions
-                   orderby s.Date
+                   orderby s.Date descending
                    select s;
         }
     }

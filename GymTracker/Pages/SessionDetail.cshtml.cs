@@ -19,9 +19,14 @@ namespace GymTracker.Pages
             this.exerciseData = exerciseData;
         }
 
-        public void OnGet(int sessionId)
+        public IActionResult OnGet(int sessionId)
         {
             Exercise = exerciseData.GetById(sessionId);
+            if(!Exercise.Any())
+            {
+                return RedirectToPage("./NotFound");
+            }
+            return Page();
         }
     }
 }
