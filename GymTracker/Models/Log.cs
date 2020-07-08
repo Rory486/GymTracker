@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace GymTracker.Models
 {
-    public class Set
+    public class Log
     {
-        public int SetId { get; set; }
+        public int LogId { get; set; }
+        [Required]
+        public int Sets { get; set; }
         [Required]
         public int Reps { get; set; }
         [Required]
         public double Weight { get; set; }
-        public int ExerciseId { get; set; }
 
+        public int ExerciseId { get; set; }
+        public Exercise Exercise { get; set; }
     }
 }
