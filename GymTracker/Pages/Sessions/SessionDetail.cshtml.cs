@@ -12,19 +12,24 @@ namespace GymTracker.Pages
     public class SessionDetailModel : PageModel
     {
         private readonly IExerciseData exerciseData;
-        public IEnumerable<Exercise> Exercise { get; set; }
+        private readonly ISessionData sessionData;
 
-        public SessionDetailModel(IExerciseData exerciseData)
+        public IEnumerable<Exercise> Exercise { get; set; }
+        public Session Session { get; set; }
+
+        public SessionDetailModel(IExerciseData exerciseData, ISessionData sessionData)
         {
             this.exerciseData = exerciseData;
+            this.sessionData = sessionData;
         }
 
         public IActionResult OnGet(int sessionId)
         {
             Exercise = exerciseData.GetById(sessionId);
-            if(!Exercise.Any())
+            Session = sessionData.GetById(sessionId);
+            if(Session == null)
             {
-                return RedirectToPage("./NotFound");
+                return RedirectToPage("../NotFound");
             }
             return Page();
         }

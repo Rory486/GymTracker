@@ -9,6 +9,7 @@ namespace GymTracker.Data
     public interface ISessionData
     {
         IEnumerable<Session> GetAll();
+        Session GetById(int id);
     }
 
     public class InMemorySessionData : ISessionData
@@ -30,6 +31,11 @@ namespace GymTracker.Data
             return from s in sessions
                    orderby s.Date descending
                    select s;
+        }
+
+        public Session GetById(int id)
+        {
+            return sessions.SingleOrDefault(r => r.SessionId == id);
         }
     }
 }
