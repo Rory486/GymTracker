@@ -15,6 +15,7 @@ namespace GymTracker.Pages.Sessions
         private readonly ISessionData sessionData;
         private readonly IExerciseData exerciseData;
 
+        [BindProperty]
         public Session Session { get; set; }
         public IEnumerable<Exercise> Exercise { get; set; }
 
@@ -32,6 +33,13 @@ namespace GymTracker.Pages.Sessions
             {
                 return RedirectToPage("../NotFound");
             }
+            return Page();
+        }
+
+        public IActionResult OnPost()
+        {
+            Session = sessionData.Update(Session);
+            sessionData.Commit();
             return Page();
         }
     }

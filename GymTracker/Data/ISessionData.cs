@@ -10,11 +10,13 @@ namespace GymTracker.Data
     {
         IEnumerable<Session> GetAll();
         Session GetById(int id);
+        Session Update(Session updatedSession);
+        int Commit();
     }
 
     public class InMemorySessionData : ISessionData
     {
-        List<Session> sessions;
+        readonly List<Session> sessions;
 
         public InMemorySessionData()
         {
@@ -24,6 +26,11 @@ namespace GymTracker.Data
                 new Session {SessionId = 2, Name = "5/3/1 Week 1 Day 2", Date = DateTime.Parse("7/7/2020") },
                 new Session {SessionId = 3, Name = "5/3/1 Week 1 Day 3", Date = DateTime.Parse("8/7/2020") }
             };
+        }
+
+        public int Commit()
+        {
+            return 0;
         }
 
         public IEnumerable<Session> GetAll()
@@ -36,6 +43,17 @@ namespace GymTracker.Data
         public Session GetById(int id)
         {
             return sessions.SingleOrDefault(r => r.SessionId == id);
+        }
+
+        public Session Update(Session updatedSession)
+        {
+            var session = sessions.SingleOrDefault(s => s.SessionId == updatedSession.SessionId);
+            if(session != null)
+            {
+                session.Name = updatedSession.Name;
+                session.Date = updatedSession.Date;
+            }
+            return session;
         }
     }
 }

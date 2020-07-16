@@ -6,4 +6,17 @@
 
 <h2>Editing @Model.Session.Name</h2>
 
+<form method="post">
+    <input type="hidden" asp-for="Session.SessionId" />
+    <div class="form-group">
+        <label asp-for="Session.Name"></label>
+        <input asp-for="Session.Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Session.Date"></label>
+        <input asp-for="Session.Date" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
 
