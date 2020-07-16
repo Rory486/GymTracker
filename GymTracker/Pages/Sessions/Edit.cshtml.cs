@@ -42,6 +42,7 @@ namespace GymTracker.Pages.Sessions
             {
                 sessionData.Update(Session);
                 sessionData.Commit();
+                return RedirectToPage("./SessionDetail", new { sessionId = Session.SessionId });
             }
             return Page();
         }
