@@ -38,8 +38,11 @@ namespace GymTracker.Pages.Sessions
 
         public IActionResult OnPost()
         {
-            Session = sessionData.Update(Session);
-            sessionData.Commit();
+            if(ModelState.IsValid)
+            {
+                sessionData.Update(Session);
+                sessionData.Commit();
+            }
             return Page();
         }
     }
