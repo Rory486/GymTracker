@@ -14,6 +14,8 @@ namespace GymTracker.Pages
         private readonly IExerciseData exerciseData;
         private readonly ISessionData sessionData;
 
+        [TempData]
+        public string Message { get; set; }
         public IEnumerable<Exercise> Exercise { get; set; }
         public Session Session { get; set; }
 

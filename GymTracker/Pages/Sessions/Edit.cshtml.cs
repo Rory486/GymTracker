@@ -25,10 +25,19 @@ namespace GymTracker.Pages.Sessions
             this.exerciseData = exerciseData;
         }
         
-        public IActionResult OnGet(int sessionId)
-        {
-            Session = sessionData.GetById(sessionId);
-            Exercise = exerciseData.GetById(sessionId);
+        public IActionResult OnGet(int? sessionId)
+        {   
+            if(sessionId.HasValue)
+            {
+                Session = sessionData.GetById(sessionId.Value);
+                Exercise = exerciseData.GetById(sessionId.Value);
+            }
+            else
+            {
+                Session = new Session();
+            }
+
+
             if(Session == null)
             {
                 return RedirectToPage("../NotFound");
@@ -38,13 +47,23 @@ namespace GymTracker.Pages.Sessions
 
         public IActionResult OnPost()
         {
-            if(ModelState.IsValid)
+            if(!ModelState.IsValid)
+            {
+                return Page();   
+            }
+
+            if (Session.SessionId > 0)
             {
                 sessionData.Update(Session);
-                sessionData.Commit();
-                return RedirectToPage("./SessionDetail", new { sessionId = Session.SessionId });
+                TempData["Message"] = "Session updated!";
             }
-            return Page();
+            else
+            {
+                sessionData.Add(Session);
+                TempData["Message"] = "Session added!";
+            }
+            sessionData.Commit();
+            return RedirectToPage("./SessionDetail", new { sessionId = Session.SessionId });
         }
     }
 }

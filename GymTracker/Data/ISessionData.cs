@@ -11,6 +11,7 @@ namespace GymTracker.Data
         IEnumerable<Session> GetAll();
         Session GetById(int id);
         Session Update(Session updatedSession);
+        Session Add(Session newSession);
         int Commit();
     }
 
@@ -43,6 +44,13 @@ namespace GymTracker.Data
         public Session GetById(int id)
         {
             return sessions.SingleOrDefault(r => r.SessionId == id);
+        }
+
+        public Session Add(Session newSession)
+        {
+            sessions.Add(newSession);
+            newSession.SessionId = sessions.Max(r => r.SessionId) + 1;
+            return newSession;
         }
 
         public Session Update(Session updatedSession)
