@@ -16,7 +16,7 @@ namespace GymTracker.Pages
 
         [TempData]
         public string Message { get; set; }
-        public IEnumerable<Exercise> Exercise { get; set; }
+        public IEnumerable<Exercise> Exercises { get; set; }
         public Session Session { get; set; }
 
         public SessionDetailModel(IExerciseData exerciseData, ISessionData sessionData)
@@ -27,9 +27,11 @@ namespace GymTracker.Pages
 
         public IActionResult OnGet(int sessionId)
         {
-            Exercise = exerciseData.GetById(sessionId);
+            Exercises = exerciseData.GetBySession(sessionId);
             Session = sessionData.GetById(sessionId);
-            if(Session == null)
+            System.Console.WriteLine(Exercises);
+
+            if(Session == null || Exercises.Any() == false)
             {
                 return RedirectToPage("../NotFound");
             }

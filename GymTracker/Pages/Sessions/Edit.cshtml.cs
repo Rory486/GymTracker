@@ -17,12 +17,13 @@ namespace GymTracker.Pages.Sessions
 
         [BindProperty]
         public Session Session { get; set; }
-        public IEnumerable<Exercise> Exercise { get; set; }
+        //public IEnumerable<Exercise> Exercises { get; set; }
 
-        public EditModel(ISessionData sessionData, IExerciseData exerciseData)
+        //add as parameter "IExerciseData exerciseData"
+        public EditModel(ISessionData sessionData)
         {
             this.sessionData = sessionData;
-            this.exerciseData = exerciseData;
+            //this.exerciseData = exerciseData;
         }
         
         public IActionResult OnGet(int? sessionId)
@@ -30,7 +31,7 @@ namespace GymTracker.Pages.Sessions
             if(sessionId.HasValue)
             {
                 Session = sessionData.GetById(sessionId.Value);
-                Exercise = exerciseData.GetById(sessionId.Value);
+                //Exercises = exerciseData.GetById(sessionId.Value);
             }
             else
             {

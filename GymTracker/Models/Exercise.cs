@@ -14,8 +14,7 @@ namespace GymTracker.Models
         public int Sets { get; set; }
         public int Reps { get; set; }
         public double Weight { get; set; }
-
         public int SessionId { get; set; }
-
+        public Session Session { get; set; }
     }
 }
